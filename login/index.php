@@ -20,12 +20,14 @@ if (isset($_SESSION['user_id'])) {
 
 <body
   class="flex flex-col justify-center items-center bg-gray-100 min-h-screen">
-  <header class="flex mb-8 px-4 py-4 w-full">
+
+  <?php include "../header.php" ?>
+  <!-- <header class="flex mb-8 px-4 py-4 w-full">
     <img
       src="../logo.png"
       alt="Logo Institución"
       class="top-10 left-5 absolute h-16" />
-  </header>
+  </header> -->
   <div class="mb-8 encabezado">
     <h1 class="font-bold text-blue-700 text-3xl text-center">
       GESTIÓN DE SOLICITUD

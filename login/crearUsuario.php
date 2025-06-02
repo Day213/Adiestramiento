@@ -73,10 +73,7 @@
   ?>
 
 
-  <header class="flex mb-8 px-4 py-4 w-full">
-    <img src="../logo.png" alt="Logo Institución" class="top-10 left-5 absolute mr-4 h-16" />
-
-  </header>
+  <?php include "../header.php" ?>
   <div class="mb-8 encabezado">
     <h1 class="font-bold text-blue-700 text-3xl text-center">Crear Usuario</h1>
     <?php
@@ -133,6 +130,8 @@
   </form>
   </div>
 </body>
+
+</html>
 
 </html>
 
