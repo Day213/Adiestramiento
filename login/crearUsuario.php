@@ -23,18 +23,51 @@
   }
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nombres = htmlspecialchars($_POST['nombres']);
-    $apellidos = htmlspecialchars($_POST['apellidos']);
-    $cedula = htmlspecialchars($_POST['cedula']);
-    $telefono = htmlspecialchars($_POST['telefono']);
-    $contrasena = htmlspecialchars($_POST['contrasena']);
-    $repetir_contrasena = htmlspecialchars($_POST['repetir_contrasena']);
+    $nombres = trim(htmlspecialchars($_POST['nombres']));
+    $apellidos = trim(htmlspecialchars($_POST['apellidos']));
+    $cedula = trim(htmlspecialchars($_POST['cedula']));
+    $telefono = trim(htmlspecialchars($_POST['telefono']));
+    $correo = trim(htmlspecialchars($_POST['correo']));
+    $contrasena = trim(htmlspecialchars($_POST['contrasena']));
+    $repetir_contrasena = trim(htmlspecialchars($_POST['repetir_contrasena']));
 
-    $passEncripted = hash('sha256', $contrasena);
+    $errores = [];
+    if (empty($nombres) || strlen($nombres) < 2) {
+      $errores[] = 'El nombre es obligatorio y debe tener al menos 2 caracteres.';
+    }
+    if (empty($apellidos) || strlen($apellidos) < 2) {
+      $errores[] = 'El apellido es obligatorio y debe tener al menos 2 caracteres.';
+    }
+    if (!preg_match('/^[0-9]{6,10}$/', $cedula)) {
+      $errores[] = 'La cédula debe ser numérica y tener entre 6 y 10 dígitos.';
+    }
+    if (strlen($telefono) >= 10) {
+      $errores[] = 'El teléfono debe ser numérico y tener menos de 10 dígitos.';
+    }
+    if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+      $errores[] = 'El correo electrónico no es válido.';
+    }
+    if (strlen($contrasena) < 6) {
+      $errores[] = 'La contraseña debe tener al menos 6 caracteres.';
+    }
+    if ($contrasena !== $repetir_contrasena) {
+      $errores[] = 'Las contraseñas no coinciden.';
+    }
 
-    if ($contrasena === $repetir_contrasena) {
-      $sql = "INSERT INTO `usuario` (`id`, `nombres`, `apellidos`, `cedula`, `telefono`, `contrasena`) VALUES (NULL, '$nombres', '$apellidos', '$cedula', '$telefono', '$passEncripted')";
-      $conexion->query($sql);
+    if (empty($errores)) {
+      $passEncripted = hash('sha256', $contrasena);
+      $sql = "INSERT INTO `usuario` (`id`, `nombres`, `apellidos`, `cedula`, `telefono`, `correo`, `contrasena`) VALUES (NULL, '$nombres', '$apellidos', '$cedula', '$telefono', '$correo', '$passEncripted')";
+      if ($conexion->query($sql)) {
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>Swal.fire({icon: 'success',title: 'Usuario creado',text: '¡Usuario registrado exitosamente!',showConfirmButton: false,timer: 1800}).then(()=>{window.location.href='index.html';});</script>";
+        exit();
+      } else {
+        echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+        echo "<script>Swal.fire({icon: 'error',title: 'Error',text: 'No se pudo registrar el usuario.'});</script>";
+      }
+    } else {
+      echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+      echo "<script>Swal.fire({icon: 'warning',title: 'Campos inválidos',html: '" . implode('<br>', $errores) . "'});</script>";
     }
   }
   ?>
@@ -73,7 +106,7 @@
       </div>
       <div class="mb-4">
         <label for="telefono" class="block mb-2 font-bold text-gray-700 text-sm">Teléfono:</label>
-        <input type="text" name="telefono" maxlength="11" placeholder="Ej: 0412-1234567"
+        <input type="number" name="telefono" placeholder="Ej: 0412-1234567"
           title="Formato: 04XX-XXXXXXX (ej: 0412-1234567)" required
           class="shadow px-3 py-2 border rounded focus:shadow-outline focus:outline-none w-full text-gray-700 leading-tight appearance-none" />
       </div>
@@ -100,6 +133,14 @@
   </form>
   </div>
 </body>
+
+</html>
+
+</html>
+
+</html>
+
+</html>
 
 </html>
 

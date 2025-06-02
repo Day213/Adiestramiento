@@ -14,7 +14,7 @@
 <body class="flex flex-col justify-center items-center bg-gray-100 min-h-screen">
   <?php include "./conexion.php" ?>
   <header class="flex mb-8 px-4 py-4 w-full">
-    <img src="logo%20.png" alt="Logo Institución" class="mr-4 h-16" />
+    <img src="logo.png" alt="Logo Institución" class="mr-4 h-16" />
 
   </header>
   <div class="mb-8 encabezado">
@@ -83,7 +83,7 @@
       </div>
       <div class="mb-4">
         <label for="correo" class="block mb-2 font-bold text-gray-700 text-sm">correo</label>
-        <input type="text" id="correo" name="correo" required
+        <input type="email" id="correo" name="correo" required
           class="shadow px-3 py-2 border rounded focus:shadow-outline focus:outline-none w-full text-gray-700 leading-tight appearance-none" />
       </div>
 
