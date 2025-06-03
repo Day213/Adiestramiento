@@ -1,4 +1,4 @@
-<?php include "./conexion.php";
+<?php
 
 if ($resultado->num_rows > 10) {
 

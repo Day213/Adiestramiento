@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   if ($resultado->num_rows > 0) {
     $fila = $resultado->fetch_assoc();
     $_SESSION['user_id'] = $fila['id'];
-    header('location:../ListarFormulario.php');
+    header('location:./ListarFormulario.php');
   } else {
     echo "error";
   }

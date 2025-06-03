@@ -1,7 +1,7 @@
-<?php include "./conexion.php";
+<?php include "../conexion.php";
 
-if (isset($_GET['id'])) { 
-    $id = intval($_GET['id']); 
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
 
     $sql = "DELETE FROM gestion WHERE id = $id";
     $resultado = mysqli_query($conexion, $sql);

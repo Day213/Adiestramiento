@@ -1,3 +1,9 @@
+<?php
+
+if (isset($_SESSION['user_id'])) {
+  header('location: ./ListarFormulario.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -65,16 +71,13 @@
           class="shadow px-3 py-2 border rounded focus:shadow-outline focus:outline-none w-full text-gray-700 leading-tight appearance-none" />
       </div>
       <div class="mb-4">
-        <label for="tema_solicitud" class="block mb-2 font-bold text-gray-700 text-sm">Tema</label>
-        <input type="text" id="tema_solicitud" name="tema_solicitud" required
+        <label for="tema_solicitante" class="block mb-2 font-bold text-gray-700 text-sm">Tema</label>
+        <input type="text" id="tema_solicitante" name="tema_solicitante" required
           class="shadow px-3 py-2 border rounded focus:shadow-outline focus:outline-none w-full text-gray-700 leading-tight appearance-none" />
       </div>
       <div class="mb-4">
         <label for="telefono" class="block mb-2 font-bold text-gray-700 text-sm">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" maxlength="11" />
-
-
-        <input type="text" name="miCampoNumerico" maxlength="11" placeholder="Ej: 0412-1234567"
+        <input type="text" name="telefono" maxlength="11" placeholder="Ej: 0412-1234567"
           title="Formato: 04XX-XXXXXXX (ej: 0412-1234567)" required
           class="shadow px-3 py-2 border rounded focus:shadow-outline focus:outline-none w-full text-gray-700 leading-tight appearance-none" />
       </div>

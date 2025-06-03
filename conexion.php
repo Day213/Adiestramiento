@@ -1,6 +1,7 @@
 <?php
 
 $servidor = "localhost";
+// $servidor = "https://q914mbk0-3306.use2.devtunnels.ms/";
 $usuario = "root";
 $contrasena = "";
 $nombre_bd = "gestion_solicitud";

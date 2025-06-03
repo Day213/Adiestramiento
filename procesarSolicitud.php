@@ -17,43 +17,46 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $nombre_solicitante = htmlspecialchars($_POST["nombre_solicitante"]);
     $cantidad_asistente = htmlspecialchars($_POST["cantidad_asistente"]);
     $fecha_aproximada = htmlspecialchars($_POST["fecha_aproximada"]);
-    $tema_solicitud = htmlspecialchars($_POST["tema_solicitud"]);
+    $tema_solicitante = htmlspecialchars($_POST["tema_solicitante"]);
     $telefono = htmlspecialchars($_POST["telefono"]);
     $correo = htmlspecialchars($_POST["correo"]);
 
-    $sql = "INSERT INTO `gestion` (`id`, `tipo_solicitud`, `nombre_solicitante`, `cantidad_asistente`, `fecha_aproximada`, `tema_solicitante`, `telefono`, `correo`) VALUES (NULL, '$tipo_solicitud', '$nombre_solicitante', '$cantidad_asistente', '$fecha_aproximada', '$tema_solicitud', '$telefono', '$correo')";
+
+    $sql = "INSERT INTO `gestion` (`id`, `tipo_solicitud`, `nombre_solicitante`, `cantidad_asistente`, `fecha_aproximada`, `tema_solicitante`, `telefono`, `status`, `correo`) VALUES (NULL, '$tipo_solicitud', '$nombre_solicitante', '$cantidad_asistente', '$fecha_aproximada', '$tema_solicitante', '$telefono', 0, '$correo')";
 
     $resultado = $conexion->query($sql);
 
     if ($resultado) {
-        $mail = new PHPMailer(true);
+        // AQUI VA LO DE EL ENVIO DEL COREO
 
-        try {
-            // Configuración del servidor SMTP
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'chiririnoana213@gmail.com'; // Tu 
-            $mail->Password   = 'iejo kxpi ekzn baxs';
-            $mail->Port = 465;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        // $mail = new PHPMailer(true);
 
-            // Remitente y destinatario
-            $mail->setFrom('chirinoana213@gmail.com', 'day');
-            $mail->addAddress('feddyskull11@gmail.com', 'fredy');
+        // try {
+        //     // Configuración del servidor SMTP
+        //     $mail->isSMTP();
+        //     $mail->Host       = 'smtp.gmail.com';
+        //     $mail->SMTPAuth   = true;
+        //     $mail->Username   = 'chiririnoana213@gmail.com'; // Tu 
+        //     $mail->Password   = 'iejo kxpi ekzn baxs';
+        //     $mail->Port = 465;
+        //     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 
-            // Contenido del correo
-            $mail->isHTML(true);
-            $mail->Subject = 'Asunto del correo';
-            $mail->Body    = 'Este es el <b>mensaje</b> de prueba usando PHPMailer.';
+        //     // Remitente y destinatario
+        //     $mail->setFrom('chirinoana213@gmail.com', 'day');
+        //     $mail->addAddress('feddyskull11@gmail.com', 'fredy');
 
-            $mail->send();
-            echo 'El mensaje ha sido enviado correctamente';
-        } catch (Exception $e) {
-            echo "No se pudo enviar el mensaje. Error: {$mail->ErrorInfo}";
-        }
-        // header("Location: index.php?exito=1");
-        // exit;
+        //     // Contenido del correo
+        //     $mail->isHTML(true);
+        //     $mail->Subject = 'Asunto del correo';
+        //     $mail->Body    = 'Este es el <b>mensaje</b> de prueba usando PHPMailer.';
+
+        //     $mail->send();
+        //     echo 'El mensaje ha sido enviado correctamente';
+        // } catch (Exception $e) {
+        //     echo "No se pudo enviar el mensaje. Error: {$mail->ErrorInfo}";
+        // }
+        header("Location: index.php?exito=1");
+        exit;
     } else {
         echo "<p style='color: red; font-weight: bold;'>Error al ingresar los datos: " . $conexion->error . "</p>";
     }
