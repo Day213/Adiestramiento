@@ -1,6 +1,7 @@
 <?php
+session_start();
 if (isset($_SESSION['user_id'])) {
-  header('location: ../ListarFormulario.php');
+  header('location: /adiestramiento/login/ListarFormulario.php');
 }
 ?>
 

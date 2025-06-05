@@ -150,47 +150,37 @@ if (isset($_SESSION['user_id'])) {
 
 
     <?php
-    $sql = "SELECT * FROM gestion";
+    $sql = "SELECT * FROM gestion WHERE status = 0";
     $resultado = mysqli_query($conexion, $sql);
-
-
-
     $registro_por_pagina = 10;
-
     $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
     if ($pagina_actual < 1) {
         $pagina_actual = 1;
     }
-
-
-
-
-    $sql_total = "SELECT COUNT(*) AS total FROM gestion";
+    $sql_total = "SELECT COUNT(*) AS total FROM gestion WHERE status = 0";
     $resultado_total = $conexion->query($sql_total);
     $fila_total = $resultado_total->fetch_assoc();
     $total_registros = $fila_total['total'];
-
-
     $total_paginas = ceil($total_registros / $registro_por_pagina);
-
-
     if ($pagina_actual > $total_paginas && $total_paginas > 0) {
         $pagina_actual = $total_paginas;
     } elseif ($total_paginas == 0) {
         $pagina_actual = 1;
     }
-
-
     $offset = ($pagina_actual - 1) * $registro_por_pagina;
-
-
-    $sql_registros = "SELECT * FROM gestion LIMIT $offset, $registro_por_pagina";
+    $sql_registros = "SELECT * FROM gestion WHERE status = 0 LIMIT $offset, $registro_por_pagina";
     $resultado_registros = $conexion->query($sql_registros);
-
-
     if (!$resultado) {
         die("Error en la consulta: " . mysqli_error($conexion));
     }
+
+
+    $sql2 = "SELECT * FROM gestion WHERE status = 1";
+    $resultado2 = mysqli_query($conexion, $sql);
+    $fila2 = $resultado2->fetch_assoc();
+
+
+
     ?>
 
     <?php if (isset($_GET['exito']) && $_GET['exito'] == '1'): ?>
@@ -246,7 +236,8 @@ if (isset($_SESSION['user_id'])) {
                                 <tr class="hover:bg-blue-50 border-b">
                                     <td class="px-4 py-2"><?php echo $fila['tipo_solicitud']; ?></td>
                                     <td class="px-4 py-2">
-                                        <div class="text-nowrap tooltip"><?php echo mb_strimwidth($fila['nombre_solicitante'], 0, 15, "..."); ?>
+                                        <div class="text-nowrap tooltip">
+                                            <?php echo mb_strimwidth($fila['nombre_solicitante'], 0, 15, "..."); ?>
                                             <span class="tooltiptext"><?php echo $fila['nombre_solicitante'] ?></span>
                                         </div>
                                     </td>
@@ -263,8 +254,11 @@ if (isset($_SESSION['user_id'])) {
 
                                     <td class="flex justify-center items-center px-4 py-2 text-center">
                                         <a href="eliminar.php?id=<?php echo $fila['id']; ?>"
-                                            class="font-semibold text-slate-500 hover:text-red-500 text-center hover:underline" onclick="return confirmar();">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-icon lucide-trash">
+                                            class="font-semibold text-slate-500 hover:text-red-500 text-center hover:underline"
+                                            onclick="return confirmar();">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-trash-icon lucide-trash">
                                                 <path d="M3 6h18" />
                                                 <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
                                                 <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
@@ -274,7 +268,9 @@ if (isset($_SESSION['user_id'])) {
                                     <td class="px-4 py-2">
                                         <a href="./respuesta.php?id=<?php echo $fila['id']; ?>"
                                             class="flex justify-center font-semibold text-slate-500 hover:text-green-500 hover:underline">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-mail-icon lucide-mail">
                                                 <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
                                                 <rect x="2" y="4" width="20" height="16" rx="2" />
                                             </svg>
@@ -288,14 +284,7 @@ if (isset($_SESSION['user_id'])) {
                     <?php include "./paginacion.php" ?>
                 </div>
                 <div id="tab2" class="tab-pane">
-                    <h3>Contenido de la Pestaña 2</h3>
-                    <p>Aquí encontrarás la información relacionada con la segunda pestaña. Es un buen lugar para organizar
-                        secciones temáticas.</p>
-                </div>
-                <div id="tab3" class="tab-pane">
-                    <h3>Contenido de la Pestaña 3</h3>
-                    <p>El contenido de la tercera pestaña. Las pestañas son excelentes para formularios, galerías de productos, o
-                        secciones de preguntas frecuentes.</p>
+
                 </div>
             </div>
         </div>
@@ -334,158 +323,5 @@ if (isset($_SESSION['user_id'])) {
         </script>
     </div>
 </body>
-
-</html>>
-</body>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
-
-</html>
 
 </html>

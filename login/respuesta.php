@@ -39,7 +39,7 @@ $fila = $respuesta->fetch_assoc();
       <label for="asunto" class="block mb-2 font-bold text-gray-700 text-sm">asunto</label>
       <input type="text" id="asunto" name="asunto" required
         class="shadow px-3 py-2 border rounded focus:shadow-outline focus:outline-none w-full text-gray-700 uppercase leading-tight appearance-none"
-        value="RESPUESTA PARA '<?php echo $fila['nombre_solicitante'] ?>' sobre el '<?php echo $fila['tipo_solicitud'] ?>' de: '<?php echo $fila['tema_solicitante'] ?>'" />
+        value="RESPUESTA PARA <?php echo $fila['nombre_solicitante'] ?> sobre el <?php echo $fila['tipo_solicitud'] ?> de: <?php echo $fila['tema_solicitante'] ?>" />
     </div>
 
     <div class="mb-4">
@@ -61,6 +61,10 @@ $fila = $respuesta->fetch_assoc();
   </form>
   </div>
 </body>
+
+</html>
+
+</html>
 
 </html>
 

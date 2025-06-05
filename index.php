@@ -44,6 +44,25 @@ if (isset($_SESSION['user_id'])) {
         });
       </script>
     <?php endif; ?>
+    <?php if (isset($_GET['error']) && $_GET['error'] == '1'): ?>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          Swal.fire({
+            icon: "error",
+            title: 'Ocurrió un error',
+            text: 'Parece que tu solicitud no se envió, vuelvelo a intentar.',
+            background: 'lime-700',
+            color: '',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            customClass: {
+              popup: 'rounded-xl shadow-lg'
+            }
+          });
+        });
+      </script>
+    <?php endif; ?>
     <form action="./procesarSolicitud.php" method="post" class="bg-white shadow-md mb-4 px-8 pt-6 pb-8 rounded">
       <div class="mb-4">
         <label for="tipo_solicitud" class="block mb-2 font-bold text-gray-700 text-sm">Elige una opción:</label>

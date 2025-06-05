@@ -9,7 +9,7 @@ $logoPath = $logoPath ? str_replace($_SERVER['DOCUMENT_ROOT'], '', $logoPath) : 
     <a href="./ListarFormulario.php">
       <img src="<?php echo $logoPath ?>" alt="Logo" class="mr-4 w-auto h-20" />
     </a>
-    <a href="../login">
+    <a href="/adiestramiento/login/cerrarSesion.php">
       <button class="bg-red-500 p-2 rounded-md font-bold text-white">Cerrar sesión</button>
     </a>
   <?php } else { ?>
