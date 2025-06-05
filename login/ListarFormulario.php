@@ -178,7 +178,28 @@ if (isset($_SESSION['user_id'])) {
     $sql2 = "SELECT * FROM gestion WHERE status = 1";
     $resultado2 = mysqli_query($conexion, $sql);
     $fila2 = $resultado2->fetch_assoc();
-
+    // Paginación para solicitudes respondidas
+    $registro_por_pagina_respondidas = 10;
+    $pagina_actual_respondidas = isset($_GET['pagina_respondidas']) ? (int)$_GET['pagina_respondidas'] : 1;
+    if ($pagina_actual_respondidas < 1) {
+        $pagina_actual_respondidas = 1;
+    }
+    $sql_total_respondidas = "SELECT COUNT(*) AS total FROM gestion WHERE status = 1";
+    $resultado_total_respondidas = $conexion->query($sql_total_respondidas);
+    $fila_total_respondidas = $resultado_total_respondidas->fetch_assoc();
+    $total_registros_respondidas = $fila_total_respondidas['total'];
+    $total_paginas_respondidas = ceil($total_registros_respondidas / $registro_por_pagina_respondidas);
+    if ($pagina_actual_respondidas > $total_paginas_respondidas && $total_paginas_respondidas > 0) {
+        $pagina_actual_respondidas = $total_paginas_respondidas;
+    } elseif ($total_paginas_respondidas == 0) {
+        $pagina_actual_respondidas = 1;
+    }
+    $offset_respondidas = ($pagina_actual_respondidas - 1) * $registro_por_pagina_respondidas;
+    $sql_registros_respondidas = "SELECT * FROM gestion WHERE status = 1 LIMIT $offset_respondidas, $registro_por_pagina_respondidas";
+    $resultado_registros_respondidas = $conexion->query($sql_registros_respondidas);
+    if (!$resultado) {
+        die("Error en la consulta: " . mysqli_error($conexion));
+    }
 
 
     ?>
@@ -284,7 +305,76 @@ if (isset($_SESSION['user_id'])) {
                     <?php include "./paginacion.php" ?>
                 </div>
                 <div id="tab2" class="tab-pane">
-
+                    <table class="bg-white shadow-md rounded-lg overflow-hidden">
+                        <thead class="bg-slate-400 text-white">
+                            <tr>
+                                <th class="px-4 py-3 text-center">Solicitud</th>
+                                <th class="px-4 py-3 text-center">Solicitante</th>
+                                <th class="px-4 py-3 text-center text-nowrap">N° asistentes</th>
+                                <th class="px-4 py-3 text-center">Fecha </th>
+                                <th class="px-4 py-3 text-center">Tema </th>
+                                <th class="px-4 py-3 text-center">Telefono</th>
+                                <th class="px-4 py-3 text-center">Correo</th>
+                                <th class="px-4 py-3 text-center">Acciones</th>
+                                <th class="px-4 py-3 text-center">Respuesta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($fila = mysqli_fetch_assoc($resultado_registros_respondidas)) { ?>
+                                <tr class="hover:bg-blue-50 border-b">
+                                    <td class="px-4 py-2"><?php echo $fila['tipo_solicitud']; ?></td>
+                                    <td class="px-4 py-2">
+                                        <div class="text-nowrap tooltip">
+                                            <?php echo mb_strimwidth($fila['nombre_solicitante'], 0, 15, "..."); ?>
+                                            <span class="tooltiptext"><?php echo $fila['nombre_solicitante'] ?></span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-2 font-bold text-slate-600 text-center"><?php echo $fila['cantidad_asistente']; ?>
+                                    </td>
+                                    <td class="px-4 py-2 font-bold text-blue-600 text-nowrap"><?php echo $fila['fecha_aproximada']; ?></td>
+                                    <td class="px-4 py-2">
+                                        <div class="text-nowrap tooltip"><?php echo mb_strimwidth($fila['tema_solicitante'], 0, 15, "..."); ?>
+                                            <span class="tooltiptext"><?php echo $fila['tema_solicitante'] ?></span>
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-2"><?php echo $fila['telefono']; ?></td>
+                                    <td class="px-4 py-2"><?php echo $fila['correo']; ?></td>
+                                    <td class="flex justify-center items-center px-4 py-2 text-center">
+                                        <a href="eliminar.php?id=<?php echo $fila['id']; ?>"
+                                            class="font-semibold text-slate-500 hover:text-red-500 text-center hover:underline"
+                                            onclick="return confirmar();">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-trash-icon lucide-trash">
+                                                <path d="M3 6h18" />
+                                                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                                                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <a href="./respuesta.php?id=<?php echo $fila['id']; ?>"
+                                            class="flex justify-center font-semibold text-slate-500 hover:text-green-500 hover:underline">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-mail-icon lucide-mail">
+                                                <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+                                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                            </svg>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                    <?php
+                    // Paginación para respondidas
+                    $resultado = $resultado_registros_respondidas;
+                    $pagina_actual = $pagina_actual_respondidas;
+                    $total_paginas = $total_paginas_respondidas;
+                    $paginacion_url = '?pagina_respondidas=';
+                    include "./paginacion_respondidas.php";
+                    ?>
                 </div>
             </div>
         </div>
@@ -294,31 +384,27 @@ if (isset($_SESSION['user_id'])) {
                 const tabButtons = document.querySelectorAll('.tab-button');
                 const tabPanes = document.querySelectorAll('.tab-pane');
 
-                tabButtons.forEach(button => {
+                // Función para activar una pestaña por índice
+                function activarTab(index) {
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.remove('active'));
+                    tabButtons[index].classList.add('active');
+                    tabPanes[index].classList.add('active');
+                }
+
+                // Detectar si la URL tiene el parámetro pagina_respondidas
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('pagina_respondidas')) {
+                    activarTab(1); // Activa la segunda pestaña (índice 1)
+                } else {
+                    activarTab(0); // Activa la primera pestaña (índice 0)
+                }
+
+                tabButtons.forEach((button, idx) => {
                     button.addEventListener('click', () => {
-                        // 1. Quitar la clase 'active' de todos los botones y paneles
-                        tabButtons.forEach(btn => btn.classList.remove('active'));
-                        tabPanes.forEach(pane => pane.classList.remove('active'));
-
-                        // 2. Agregar la clase 'active' al botón clicado
-                        button.classList.add('active');
-
-                        // 3. Obtener el ID del contenido de la pestaña a mostrar
-                        const targetTabId = button.dataset.tab; // Obtiene "tab1", "tab2", etc.
-                        const targetTabPane = document.getElementById(targetTabId);
-
-                        // 4. Mostrar el contenido de la pestaña correspondiente
-                        if (targetTabPane) {
-                            targetTabPane.classList.add('active');
-                        }
+                        activarTab(idx);
                     });
                 });
-
-                // Opcional: Si quieres que la primera pestaña esté activa por defecto al cargar la página
-                // Simula un clic en el primer botón de pestaña
-                if (tabButtons.length > 0) {
-                    tabButtons[0].click();
-                }
             });
         </script>
     </div>
