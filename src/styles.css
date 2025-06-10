@@ -1,0 +1,538 @@
+/* Archivo base de estilos para Adiestramiento */
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.upppercase {
+  text-transform: uppercase;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Estilos básicos del contenedor */
+.tabs-container {
+  margin: 50px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+/* Estilos de los botones de las pestañas */
+.tab-buttons {
+  display: flex;
+  /* Para que los botones se coloquen uno al lado del otro */
+  border-bottom: 1px solid #ccc;
+  background-color: #f4f4f4;
+}
+
+.tab-button {
+  padding: 15px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  transition: background-color 0.3s, color 0.3s;
+  flex-grow: 1;
+  /* Para que los botones ocupen el espacio disponible equitativamente */
+  text-align: center;
+}
+
+.tab-button:hover {
+  background-color: #e2e2e2;
+}
+
+.tab-button.active {
+  background-color: #fff;
+  color: #333;
+  border-bottom: 3px solid #007bff;
+  /* Indicador de pestaña activa */
+  font-weight: bold;
+}
+.p-1 {
+  padding: 0.5rem;
+}
+.w-5 {
+  height: 3rem;
+}
+.h-5 {
+  height: 3rem;
+}
+
+.rounded-full {
+  border-radius: 100%;
+}
+/* Estilos del contenido de las pestañas */
+.tab-content {
+  padding: 20px;
+  background-color: #fff;
+}
+
+.tab-pane {
+  display: none;
+  /* Por defecto, todos los paneles están ocultos */
+}
+
+.tab-pane.active {
+  display: block;
+  /* Solo el panel activo se muestra */
+}
+
+.tab-pane h3 {
+  color: #007bff;
+  margin-top: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.btn {
+  background-color: #2563eb;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  border: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.btn:hover {
+  background-color: #1e40af;
+}
+
+.mb-6 {
+  margin-bottom: 60px;
+}
+.w-full {
+  width: 100%;
+}
+
+body {
+  overflow: hidden;
+}
+
+/* Estilos básicos inspirados en Tailwind CSS */
+
+/* Espaciado */
+
+.bg-red-500 {
+  background-color: #ef4444;
+}
+.bg-slate-400 {
+  background-color: #94a3b8 !important;
+}
+.bg-slate-300 {
+  background-color: oklch(86.9% 0.022 252.894);
+}
+
+a {
+  color: #646464;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+  margin: 0px 10px;
+}
+.border-b {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #e5e7eb;
+}
+
+table {
+  border-spacing: 0px;
+}
+
+.border-none {
+  border: none;
+}
+
+.bg-green-600 {
+  background-color: #00c043;
+}
+.bg-orange-400 {
+  background-color: #ff8904;
+}
+.bg-green-700 {
+  background-color: #008236;
+}
+
+/* --color-red-500: oklch(63.7% 0.237 25.331);
+    --color-green-500: oklch(72.3% 0.219 149.579);
+    --color-cyan-700: oklch(52% 0.105 223.128);
+    --color-blue-50: oklch(97% 0.014 254.604);
+    --color-blue-600: oklch(54.6% 0.245 262.881);
+    --color-slate-200: oklch(92.9% 0.013 255.508);
+    --color-slate-300: oklch(86.9% 0.022 252.894);
+    --color-slate-400: oklch(70.4% 0.04 256.788);
+    --color-slate-500: oklch(55.4% 0.046 257.417);
+    --color-slate-600: oklch(44.6% 0.043 257.281);
+    --color-gray-100: oklch(96.7% 0.003 264.542); */
+
+.p-2 {
+  padding: 0.5rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.px-6 {
+  padding: 3rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-3 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.m-2 {
+  margin: 0.5rem;
+}
+.m-4 {
+  margin: 1rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+/* Tamaño de fuente */
+.text-xs {
+  font-size: 0.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+}
+.text-base {
+  font-size: 1rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+/* Colores de fondo */
+.bg-blue-500 {
+  background-color: #3b82f6;
+}
+.bg-blue-600 {
+  background-color: #2563eb;
+}
+.bg-blue-700 {
+  background-color: #1d4ed8;
+}
+.bg-gray-100 {
+  background-color: #f3f4f6;
+}
+.bg-white {
+  background-color: #fff;
+}
+
+/* Colores de texto */
+.text-white {
+  color: #fff;
+}
+.text-gray-700 {
+  color: #374151;
+}
+.text-blue-700 {
+  color: #1d4ed8;
+}
+
+/* Bordes */
+.rounded {
+  border-radius: 0.25rem;
+}
+.rounded-md {
+  border-radius: 0.375rem;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+.border {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e5e7eb;
+}
+
+/* Sombra */
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(206, 15, 15, 0.06);
+}
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* Flex */
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-4 {
+  gap: 1rem;
+}
+
+/* Altura mínima pantalla */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Máximo ancho */
+.max-w-md {
+  max-width: 28rem;
+}
+
+/* Ancho y alto */
+.h-10 {
+  height: 2.5rem;
+}
+.h-12 {
+  height: 3rem;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-12 {
+  width: 3rem;
+}
+
+/* Otros utilitarios */
+.font-bold {
+  font-weight: bold;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.text-center {
+  text-align: center;
+}
+
+/* Posicionamiento */
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.fixed {
+  position: fixed;
+}
+.sticky {
+  position: sticky;
+}
+
+.top-0 {
+  top: 0;
+}
+.right-0 {
+  right: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.left-0 {
+  left: 0;
+}
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* Z-index */
+.z-0 {
+  z-index: 0;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-20 {
+  z-index: 20;
+}
+.z-30 {
+  z-index: 30;
+}
+.z-40 {
+  z-index: 40;
+}
+.z-50 {
+  z-index: 50;
+}
+
+/* Overflow */
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-auto {
+  overflow: auto;
+}
+.overflow-scroll {
+  overflow: scroll;
+}
+
+/* Opacidad */
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-50 {
+  opacity: 0.5;
+}
+.opacity-75 {
+  opacity: 0.75;
+}
+.opacity-100 {
+  opacity: 1;
+}
+
+/* Cursor */
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+/* Display */
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.inline {
+  display: inline;
+}
+.hidden {
+  display: none;
+}
+
+/* Espaciados extra */
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.pt-6 {
+  padding-top: 1.5rem;
+}
+.pb-8 {
+  padding-bottom: 2rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* Leading */
+.leading-tight {
+  line-height: 1.25;
+}
+
+/* Appearance */
+.appearance-none {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Transiciones */
+.transition {
+  transition-property: all;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.duration-150 {
+  transition-duration: 150ms;
+}
+
+/* Focus y hover */
+.focus\:shadow-outline:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  outline: none;
+}
+.hover\:bg-blue-700:hover {
+  background-color: #1d4ed8;
+}
