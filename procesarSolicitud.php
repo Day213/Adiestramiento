@@ -29,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->Port = 465;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->SMTPAuth = true;
-        $mail->Username = 'chirinoana213@gmail.com';
-        $mail->Password = 'iejokxpiekznbaxs';
-        $mail->setFrom('chirinoana213@gmail.com', 'Departamento de Adiestramiento y control UNEFM');
+        $mail->Username = 'desarrollodie@correo.unefm.edu.ve';
+        $mail->Password = '<ubM9=jhV76P4yF<';
+        $mail->setFrom('desarrollodie@correo.unefm.edu.ve', 'Departamento de Adiestramiento y control UNEFM');
         $mail->addReplyTo('adiestramiento@correo.unefm.edu.ve', 'Departamento de adiestramiento.');
         $mail->addAddress($correo, 'Solicitante');
 
@@ -48,9 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail2->Port = 465;
         $mail2->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail2->SMTPAuth = true;
-        $mail2->Username = 'chirinoana213@gmail.com';
+        $mail2->Username = '.com';
         $mail2->Password = 'iejokxpiekznbaxs';
-        $mail2->setFrom('chirinoana213@gmail.com', 'Departamento de Adiestramiento y control UNEFM');
+        $mail2->setFrom('desarrollodie@correo.unefm.edu.ve', 'Departamento de Adiestramiento y control UNEFM');
         $mail2->addReplyTo('adiestramiento@correo.unefm.edu.ve', 'Departamento de adiestramiento.');
         $mail2->addAddress('freddyskull11@gmail.com', 'Administrador');
         $mail2->isHTML(true);

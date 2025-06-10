@@ -1,8 +1,9 @@
 <?php
-
+session_start();
 if (isset($_SESSION['user_id'])) {
-  header('location: ./ListarFormulario.php');
+  header('location: /adiestramiento/login/ListarFormulario.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,9 +12,7 @@ if (isset($_SESSION['user_id'])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestión de Solicitud</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="/src/styles.css" rel="stylesheet" />
-
+  <link href="./src/styles.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -108,7 +107,7 @@ if (isset($_SESSION['user_id'])) {
 
       <div class="flex justify-center items-center">
         <button type="submit"
-          class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded focus:shadow-outline focus:outline-none font-bold text-white transition duration-150">Enviar
+          class="bg-blue-600 hover:bg-blue-700 px-6 py-2 border-none rounded focus:shadow-outline focus:outline-none font-bold text-white uppercase transition duration-150">Enviar
           Solicitud</button>
       </div>
     </form>

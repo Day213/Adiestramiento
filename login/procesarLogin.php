@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $_SESSION['user_id'] = $fila['id'];
     header('location:./ListarFormulario.php');
   } else {
-    echo "error";
+    header('location:index.php?error=1');
   }
 
 

@@ -12,8 +12,8 @@ if (isset($_SESSION['user_id'])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestión de Solicitud</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="/src/styles.css" rel="stylesheet" />
+
+  <link href="../src/styles.css" rel="stylesheet" />
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -27,10 +27,28 @@ if (isset($_SESSION['user_id'])) {
       src="../logo.png"
       alt="Logo Institución"
       class="top-10 left-5 absolute h-16" />
-  </header> -->
+  </header> --><?php if (isset($_GET['error']) && $_GET['error'] == '1'): ?>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+          icon: "error",
+          title: ' error: al inicial sesión',
+          text: 'la cedula o la contraseña es incorrecta.',
+          background: 'lime-700',
+          color: '',
+          showConfirmButton: false,
+          timer: 5000,
+          timerProgressBar: true,
+          customClass: {
+            popup: 'rounded-xl shadow-lg'
+          }
+        });
+      });
+    </script>
+  <?php endif; ?>
   <div class="mb-8 encabezado">
-    <h1 class="font-bold text-blue-700 text-3xl text-center">
-      GESTIÓN DE SOLICITUD
+    <h1 class="font-bold text-blue-700 text-3xl text-center uppercase">
+      iniciar sesión
     </h1>
   </div>
 
@@ -65,14 +83,14 @@ if (isset($_SESSION['user_id'])) {
         <div>
           <button
             type="submit"
-            class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded focus:shadow-outline focus:outline-none w-full font-bold text-white transition duration-150">
+            class="bg-blue-600 hover:bg-blue-700 px-6 py-2 border-none rounded focus:shadow-outline focus:outline-none w-full font-bold text-white uppercase transition duration-150">
             Ingresar
           </button>
         </div>
       </div>
       <div class="flex justify-between mt-4 text-blue-700">
-        <a href="./crearUsuario.php"> Crear Nuevo Usuario</a>
-        <a href="./olvide.php"> ¿Olvidé mi Contraseña?</a>
+        <!-- <a href="./crearUsuario.php"> Crear Nuevo Usuario</a>
+        <a href="./olvide.php"> ¿Olvidé mi Contraseña?</a> -->
       </div>
     </form>
   </div>
