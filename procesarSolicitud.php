@@ -7,6 +7,10 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
+$correo_enviador = "chirinoana213@gmail.com";   // correo desde donde se va a enviar
+$contrasena_app_correo = "iejokxpiekznbaxs";    // contrseña del correo
+$correo_personal = "freddyskull11@gmail.com";   // correo al que se va a notificar todo el formulario
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $tipo_solicitud = htmlspecialchars($_POST["tipo_solicitud"]);
     $nombre_solicitante = htmlspecialchars($_POST["nombre_solicitante"]);
@@ -29,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->Port = 465;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->SMTPAuth = true;
-        $mail->Username = 'desarrollodie@correo.unefm.edu.ve';
-        $mail->Password = '<ubM9=jhV76P4yF<';
-        $mail->setFrom('desarrollodie@correo.unefm.edu.ve', 'Departamento de Adiestramiento y control UNEFM');
+        $mail->Username = $correo_enviador;
+        $mail->Password = $contrasena_app_correo;
+        $mail->setFrom($correo_enviador, 'Departamento de Adiestramiento y control UNEFM');
         $mail->addReplyTo('adiestramiento@correo.unefm.edu.ve', 'Departamento de adiestramiento.');
         $mail->addAddress($correo, 'Solicitante');
 
@@ -41,6 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail->AltBody = 'This is a plain-text message body';
         $mail->send();
 
+
+        // 2do correo enviado par notificar todos los campos del formulario
+
         $mail2 = new PHPMailer();
         $mail2->isSMTP();
         // $mail2->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -48,11 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $mail2->Port = 465;
         $mail2->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail2->SMTPAuth = true;
-        $mail2->Username = '.com';
-        $mail2->Password = 'iejokxpiekznbaxs';
-        $mail2->setFrom('desarrollodie@correo.unefm.edu.ve', 'Departamento de Adiestramiento y control UNEFM');
+        $mail2->Username = $correo_enviador;
+        $mail2->Password = $contrasena_app_correo;
+        $mail2->setFrom($correo_enviador, 'Departamento de Adiestramiento y control UNEFM');
         $mail2->addReplyTo('adiestramiento@correo.unefm.edu.ve', 'Departamento de adiestramiento.');
-        $mail2->addAddress('freddyskull11@gmail.com', 'Administrador');
+        $mail2->addAddress($correo_personal, 'Administrador');
         $mail2->isHTML(true);
         $mail2->Subject = 'Nueva solicitud recibida: ' . $tipo_solicitud . ' de ' . $tema_solicitante;
         $mail2->Body    = '<h1>Se ha recibido una nueva solicitud</h1></br>
